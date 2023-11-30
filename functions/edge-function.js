@@ -21,7 +21,8 @@ export async function handleHttpRequest(request, context) {
 
   
   // Add the customer's postal_code to the json response
-  const body = context.device.wurfl_cap_device_os;
+  const body = context.client.dst_addr
+    
   
   //const jsonBody = JSON.stringify(body);
 
