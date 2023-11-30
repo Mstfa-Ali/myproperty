@@ -17,5 +17,14 @@
  * @returns {Response | Promise<Response>}
  */
 export async function handleHttpRequest(request, context) {
-  return new Response('Hello, world!');
+  
+    // Parse the response body as JSON
+  const response = new Response('Hello, world!');
+
+  // Add the customer's postal_code to the json response
+  body.postal_code = context.geo.postal_code;
+  
+  const jsonBody = JSON.stringify(body);
+  
+  return new Response(jsonBody, response);
 }
