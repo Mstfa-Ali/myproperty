@@ -21,7 +21,7 @@ export async function handleHttpRequest(request, context) {
 
   
   // Add the customer's postal_code to the json response
-  const postal_code = context.geo.
+  const postal_code = context.geo
   
   const jsonBody = JSON.stringify(body);
   
