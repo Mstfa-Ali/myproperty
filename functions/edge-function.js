@@ -18,13 +18,12 @@
  */
 export async function handleHttpRequest(request, context) {
   
-    // Parse the response body as JSON
-  const response = new Response('Hello, world!');
+
   
   // Add the customer's postal_code to the json response
-  const postal_code = context.geo.postal_code;
+  const postal_code = context.geo.
   
-  //const jsonBody = JSON.stringify(body);
+  const jsonBody = JSON.stringify(body);
   
-  return new Response(postal_code, response);
+  return new Response(jsonBody);
 }
