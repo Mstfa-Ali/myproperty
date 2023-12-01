@@ -22,7 +22,7 @@
 export async function handleHttpRequest(request, context) {
   
 
-  const body = context.client.dst_addr+"-----"+totalCount;
+  const body = "ClientIP:- "+context.client.dst_addr;
     
   
   //const jsonBody = JSON.stringify(body);
