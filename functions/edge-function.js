@@ -16,12 +16,29 @@
  * @param {Object} context.requestVars - Information about this property including values set using Set Variables.
  * @returns {Response | Promise<Response>}
  */
+
+
+
 export async function handleHttpRequest(request, context) {
   
+  const { environmentVars: env } = context;
 
-  
+  const config = {
+    host: 'aws.connect.psdb.cloud',
+    username: env.PLANETSCALE_USERNAME,
+    password: env.PLANETSCALE_PASSWORD,
+    
+  };
+
+  const conn = connect(config);
+
+  const results = await conn.transaction(async (tx) => {
+    await tx.execute('INSERT INTO example_table () VALUES ();');
+    return await tx.execute('SELECT COUNT(*) as total FROM example_table;');
+  });
+  const totalCount = results.rows[0].total;
   // Add the customer's postal_code to the json response
-  const body = context.client.dst_addr+"-----"+context.geo.asnum+"--------"+context.geo.continent+"-------"+context.geo.postal_code+"------"+context.device.cap_device_os;
+  const body = context.client.dst_addr+"-----"+totalCount;
     
   
   //const jsonBody = JSON.stringify(body);
