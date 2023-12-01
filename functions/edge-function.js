@@ -16,7 +16,15 @@
  * @param {Object} context.requestVars - Information about this property including values set using Set Variables.
  * @returns {Response | Promise<Response>}
  */
+import { connect } from '@planetscale/database';
 
+// polyfill required classes for Planetscale
+import '../../../utils/polyfills/Buffer';
+import '../../../utils/polyfills/URL';
+
+import createFetchForOrigin from '../../../utils/createFetchForOrigin';
+
+const fetch = createFetchForOrigin('planetscale');
 
 
 export async function handleHttpRequest(request, context) {
@@ -27,6 +35,7 @@ export async function handleHttpRequest(request, context) {
     host: 'aws.connect.psdb.cloud',
     username: env.PLANETSCALE_USERNAME,
     password: env.PLANETSCALE_PASSWORD,
+    fetch,
     
   };
 
