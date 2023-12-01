@@ -16,37 +16,12 @@
  * @param {Object} context.requestVars - Information about this property including values set using Set Variables.
  * @returns {Response | Promise<Response>}
  */
-import { connect } from '@planetscale/database';
 
-// polyfill required classes for Planetscale
-import '../../../utils/polyfills/Buffer';
-import '../../../utils/polyfills/URL';
-
-import createFetchForOrigin from '../../../utils/createFetchForOrigin';
-
-const fetch = createFetchForOrigin('planetscale');
 
 
 export async function handleHttpRequest(request, context) {
   
-  const { environmentVars: env } = context;
 
-  const config = {
-    host: 'aws.connect.psdb.cloud',
-    username: env.PLANETSCALE_USERNAME,
-    password: env.PLANETSCALE_PASSWORD,
-    fetch,
-    
-  };
-
-  const conn = connect(config);
-
-  const results = await conn.transaction(async (tx) => {
-    await tx.execute('INSERT INTO example_table () VALUES ();');
-    return await tx.execute('SELECT COUNT(*) as total FROM example_table;');
-  });
-  const totalCount = results.rows[0].total;
-  // Add the customer's postal_code to the json response
   const body = context.client.dst_addr+"-----"+totalCount;
     
   
