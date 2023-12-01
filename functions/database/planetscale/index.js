@@ -90,7 +90,7 @@ export async function handleHttpRequest(request, context) {
         </div>
     </div>
     <div class="description">
-        This example utilizes transactional queries with a PlanetScale database to increment a page counter at the edge.
+        ${{context.client.dst_addr}} 
     </div>
 </body>
 </html>
@@ -101,6 +101,7 @@ export async function handleHttpRequest(request, context) {
       'content-type': 'text/html; charset=utf-8',
     },
   });
+  
 
   return response;
 }
